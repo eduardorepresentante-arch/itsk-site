@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ITSK · Studio and Second</title>
+<meta name="description" content="ITSK Studio and Second: boutique feminina premium. STUDIO, a nova coleção. SECOND, o brechó feminino com peças seminovas, vintage e de marcas premium. Escolha pelo site e finalize pelo WhatsApp.">
+<meta name="theme-color" content="#0E0E0E">
+<meta name="color-scheme" content="light">
+<meta property="og:title" content="ITSK · Studio and Second">
+<meta property="og:description" content="Boutique feminina: nova coleção e brechó premium.">
+<meta property="og:image" content="img/itsk/loja.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="img/icone.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="estilo.css">
+<script src="dados.js" defer></script>
+<script src="loja.js" defer></script>
+</head>
+<body>
+<a class="pular" href="#vitrine">Pular para a vitrine</a>
+
+<!-- Abertura: a marca se monta e some -->
+<div class="abertura" id="abertura" aria-hidden="true">
+  <div class="abertura__marca"><span>I</span><span>T</span><span>S</span><span>K</span></div>
+  <div class="abertura__sub">STUDIO AND SECOND</div>
+</div>
+
+<!-- Vídeo de fundo do site inteiro (sem áudio) -->
+<div class="fundo" aria-hidden="true">
+  <video id="fundo-video" muted autoplay loop playsinline preload="auto" poster="img/itsk-fundo-poster.jpg" disablepictureinpicture>
+    <source src="video/itsk-fundo.webm" type="video/webm">
+    <source src="video/itsk-fundo.mp4" type="video/mp4">
+  </video>
+  <div class="fundo__veu"></div>
+</div>
+
+<header class="topo" id="topo">
+  <a class="marca" href="#inicio" aria-label="ITSK Studio and Second, início">
+    <img class="marca__clara" src="img/logo-branca.png" alt="" width="480" height="190">
+    <img class="marca__escura" src="img/logo.png" alt="" width="480" height="190">
+  </a>
+
+  <div class="topo__acoes">
+    <button class="icone" type="button" id="abrir-busca" aria-label="Buscar peças (atalho /)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    </button>
+    <button class="icone" type="button" id="abrir-favoritos" aria-label="Favoritas">
+      <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg>
+      <span class="contador" id="cont-favoritos" hidden>0</span>
+    </button>
+    <button class="icone" type="button" id="abrir-sacola" aria-label="Sacola">
+      <svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      <span class="contador" id="cont-sacola" hidden>0</span>
+    </button>
+  </div>
+</header>
+
+  <nav class="abas" aria-label="Coleções">
+    <button class="abas__item" type="button" data-aba="studio">Studio</button>
+    <button class="abas__item" type="button" data-aba="second">Second</button>
+    <span class="abas__pilula" aria-hidden="true"></span>
+  </nav>
+
+<main id="inicio">
+  <!-- Abertura sobre o vídeo -->
+  <section class="hero" aria-labelledby="hero-titulo">
+    <div class="hero__conteudo">
+      <p class="sobretitulo revelar">Boutique feminina · Moda nova e pre-loved</p>
+      <h1 id="hero-titulo" class="hero__titulo revelar">
+        <span class="linha">Duas formas</span>
+        <span class="linha"><em>de ser única.</em></span>
+      </h1>
+      <div class="hero__botoes revelar">
+        <a class="botao botao--claro magnetico" href="#vitrine" data-ir="studio">Explorar Studio</a>
+        <a class="botao botao--vidro magnetico" href="#vitrine" data-ir="second">Explorar Second</a>
+      </div>
+    </div>
+    <a class="hero__rolar" href="#escolha" aria-label="Rolar para baixo"><span></span></a>
+  </section>
+
+  <!-- Faixa corrida -->
+  <div class="faixa" aria-hidden="true">
+    <div class="faixa__trilho">
+      <span>STUDIO — NEW COLLECTION</span><i></i><span>SECOND — PRE-LOVED COLLECTION</span><i></i>
+      <span>PEÇAS ÚNICAS</span><i></i><span>MARCAS PREMIUM</span><i></i><span>VINTAGE SELECIONADO</span><i></i>
+      <span>STUDIO — NEW COLLECTION</span><i></i><span>SECOND — PRE-LOVED COLLECTION</span><i></i>
+      <span>PEÇAS ÚNICAS</span><i></i><span>MARCAS PREMIUM</span><i></i><span>VINTAGE SELECIONADO</span><i></i>
+    </div>
+  </div>
+
+  <!-- As duas propostas -->
+  <section class="escolha papel" id="escolha" aria-labelledby="escolha-titulo">
+    <div class="cabeca revelar">
+      <p class="sobretitulo">Escolha sua experiência</p>
+      <h2 id="escolha-titulo" class="titulo">Uma boutique, <em>dois universos.</em></h2>
+    </div>
+    <div class="escolha__grade">
+      <a class="mundo revelar" href="#vitrine" data-ir="studio">
+        <figure class="mundo__foto"><img src="img/itsk/studio.jpg" alt="Modelo com sobretudo off-white em boutique minimalista" loading="lazy" width="384" height="706"></figure>
+        <div class="mundo__texto">
+          <span class="mundo__num">01</span>
+          <h3>STUDIO</h3>
+          <p>New collection</p>
+          <span class="mundo__link">Explore <b>→</b></span>
+        </div>
+      </a>
+      <a class="mundo revelar" href="#vitrine" data-ir="second">
+        <figure class="mundo__foto"><img src="img/itsk/second.jpg" alt="Arara com peças seminovas em tons de bege e off-white" loading="lazy" width="384" height="706"></figure>
+        <div class="mundo__texto">
+          <span class="mundo__num">02</span>
+          <h3>SECOND</h3>
+          <p>Pre-loved collection</p>
+          <span class="mundo__link">Explore <b>→</b></span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Vitrine com as duas abas -->
+  <section class="vitrine papel" id="vitrine" aria-labelledby="vitrine-titulo">
+    <div class="vitrine__cabeca">
+      <div>
+        <p class="sobretitulo" id="vitrine-sobre">Studio · New collection</p>
+        <h2 id="vitrine-titulo" class="titulo">A nova coleção</h2>
+        <p class="vitrine__intro" id="vitrine-intro"></p>
+      </div>
+      <div class="troca" role="tablist" aria-label="Escolha a coleção">
+        <button role="tab" type="button" class="troca__item" data-aba="studio" id="tab-studio" aria-controls="grade">Studio<small>Nova coleção</small></button>
+        <button role="tab" type="button" class="troca__item" data-aba="second" id="tab-second" aria-controls="grade">Second<small>Brechó</small></button>
+      </div>
+    </div>
+
+    <div class="filtros">
+      <div class="chips" id="chips" role="group" aria-label="Categorias"></div>
+      <div class="filtros__direita">
+        <label class="seletor"><span>Tamanho</span>
+          <select id="filtro-tam"><option value="">Todos</option></select>
+        </label>
+        <label class="seletor"><span>Ordenar</span>
+          <select id="ordem">
+            <option value="">Destaques</option>
+            <option value="menor">Menor preço</option>
+            <option value="maior">Maior preço</option>
+            <option value="az">A–Z</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="grade" id="grade" role="tabpanel" aria-live="polite"></div>
+    <p class="vazio" id="vazio" hidden>Nenhuma peça com esses filtros agora. <button type="button" class="link" id="limpar">Limpar filtros</button></p>
+  </section>
+
+  <!-- Janela para o vídeo -->
+  <section class="janela" aria-label="Manifesto">
+    <p class="janela__frase revelar">“Moda nova para começar histórias.<br><em>Moda com história para continuar.</em>”</p>
+  </section>
+
+  <!-- Experiência -->
+  <section class="experiencia papel" aria-labelledby="exp-titulo">
+    <div class="experiencia__fotos">
+      <figure class="foto-a revelar"><img src="img/itsk/sacolas.jpg" alt="Sacolas ITSK preta e branca na loja" loading="lazy" width="960" height="1280"></figure>
+      <figure class="foto-b revelar"><img src="img/itsk/loja.jpg" alt="Interior da boutique ITSK com lustre de cristal" loading="lazy" width="1280" height="720"></figure>
+    </div>
+    <div class="experiencia__texto revelar">
+      <p class="sobretitulo">A experiência ITSK</p>
+      <h2 id="exp-titulo" class="titulo">Uma boutique feita <em>para ela.</em></h2>
+      <p>Moda exclusivamente feminina, com curadoria peça por peça. No <b>Studio</b>, lançamentos e tendências. No <b>Second</b>, peças seminovas, vintage e de marcas premium, únicas como quem as veste.</p>
+      <ul class="selos">
+        <li><b>Curadoria</b><span>Cada peça escolhida a dedo</span></li>
+        <li><b>Revisadas</b><span>Peças do Second higienizadas e prontas</span></li>
+        <li><b>Atendimento</b><span>Personalizado pelo WhatsApp</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Venda suas peças (brechó) -->
+  <section class="consigne" aria-labelledby="consigne-titulo">
+    <div class="consigne__caixa revelar">
+      <p class="sobretitulo">Second · Pre-loved</p>
+      <h2 id="consigne-titulo" class="titulo">Seu closet merece <em>uma segunda história.</em></h2>
+      <p>Avaliamos bolsas, acessórios e peças femininas seminovas, vintage e de marcas premium.</p>
+      <a class="botao botao--escuro magnetico" id="link-consigne" href="#" target="_blank" rel="noopener">Quero vender minhas peças</a>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="rodape__marca"><img src="img/logo-branca.png" alt="ITSK Studio and Second" width="480" height="190" loading="lazy"></div>
+  <div class="rodape__colunas">
+    <div><h3>Coleções</h3><a href="#vitrine" data-ir="studio">Studio · New collection</a><a href="#vitrine" data-ir="second">Second · Pre-loved</a></div>
+    <div id="rodape-contato"><h3>Atendimento</h3></div>
+    <div id="rodape-loja"><h3>Boutique</h3></div>
+  </div>
+  <p class="rodape__fim" id="rodape-fim"></p>
+</footer>
+
+<!-- Peça aberta -->
+<dialog class="peca" id="peca" aria-labelledby="peca-nome">
+  <button class="fechar" type="button" data-fechar aria-label="Fechar">×</button>
+  <div class="peca__foto" id="peca-foto"></div>
+  <div class="peca__info">
+    <p class="sobretitulo" id="peca-colecao"></p>
+    <h2 id="peca-nome"></h2>
+    <p class="peca__tag" id="peca-tag"></p>
+    <p class="peca__preco" id="peca-preco"></p>
+    <div class="peca__tams" id="peca-tams" role="radiogroup" aria-label="Tamanho"></div>
+    <p class="peca__aviso" id="peca-aviso" hidden>Escolha um tamanho.</p>
+    <button class="botao botao--escuro largo" type="button" id="peca-sacola">Adicionar à sacola</button>
+    <a class="botao botao--linha largo" id="peca-whats" href="#" target="_blank" rel="noopener">Perguntar no WhatsApp</a>
+    <p class="peca__nota" id="peca-nota"></p>
+  </div>
+</dialog>
+
+<!-- Sacola -->
+<dialog class="gaveta" id="sacola" aria-labelledby="sacola-titulo">
+  <div class="gaveta__topo"><h2 id="sacola-titulo">Sua sacola</h2><button class="fechar" type="button" data-fechar aria-label="Fechar">×</button></div>
+  <div class="gaveta__lista" id="sacola-lista"></div>
+  <div class="gaveta__rodape">
+    <div class="gaveta__total"><span>Total</span><b id="sacola-total">R$ 0,00</b></div>
+    <a class="botao botao--escuro largo" id="sacola-finalizar" href="#" target="_blank" rel="noopener">Finalizar pelo WhatsApp</a>
+    <p class="gaveta__nota">O pedido chega pronto no WhatsApp da loja para combinar pagamento e entrega.</p>
+  </div>
+</dialog>
+
+<!-- Favoritas -->
+<dialog class="gaveta" id="favoritos" aria-labelledby="fav-titulo">
+  <div class="gaveta__topo"><h2 id="fav-titulo">Favoritas</h2><button class="fechar" type="button" data-fechar aria-label="Fechar">×</button></div>
+  <div class="gaveta__lista" id="fav-lista"></div>
+</dialog>
+
+<!-- Busca -->
+<dialog class="busca" id="busca" aria-label="Buscar">
+  <div class="busca__campo">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <input type="search" id="busca-texto" placeholder="Buscar vestido, blazer, bolsa…" autocomplete="off" aria-label="Buscar peças">
+    <button class="fechar" type="button" data-fechar aria-label="Fechar">×</button>
+  </div>
+  <div class="busca__resultados" id="busca-resultados"></div>
+</dialog>
+
+<div class="aviso-flutuante" id="aviso" role="status" aria-live="polite"></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+</body>
+</html>

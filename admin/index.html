@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Administração · ITSK Studio and Second</title>
+<link rel="icon" href="../img/icone.svg">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- Entrar -->
+<section class="entrar" id="tela-entrar" hidden>
+  <form class="entrar__caixa" id="form-entrar">
+    <img src="../img/logo.png" alt="ITSK Studio and Second" width="480" height="190">
+    <h1>Administração</h1>
+    <label for="email">E-mail</label>
+    <input id="email" type="email" autocomplete="username" required>
+    <label for="senha">Senha</label>
+    <input id="senha" type="password" autocomplete="current-password" required>
+    <p class="aviso-erro" id="entrar-erro" hidden></p>
+    <button class="btn btn--rosa" type="submit">Entrar</button>
+    <a class="link" href="../">Voltar para o site</a>
+  </form>
+</section>
+
+<!-- Painel -->
+<div class="painel" id="tela-painel" hidden>
+  <header class="topo">
+    <div class="topo__dentro">
+      <img class="topo__logo" src="../img/logo.png" alt="ITSK Studio and Second" width="480" height="190">
+      <nav class="abas" role="tablist" aria-label="Seções">
+        <button type="button" role="tab" id="aba-caixa" aria-controls="sec-caixa" aria-selected="true">Vendas e caixa</button>
+        <button type="button" role="tab" id="aba-produtos" aria-controls="sec-produtos" aria-selected="false">Produtos e fotos</button>
+        <button type="button" role="tab" id="aba-estoque" aria-controls="sec-estoque" aria-selected="false">Estoque</button>
+      </nav>
+      <div class="topo__acoes">
+        <a class="link" href="../" target="_blank" rel="noopener">Ver site</a>
+        <button class="link" type="button" id="sair">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <p class="faixa-alerta" id="aviso-senha" hidden>Sua senha de administração é fraca. Troque por uma com 12 caracteres ou mais, misturando letras maiúsculas, minúsculas, números e símbolos (Cloudflare → projeto → Settings → Variables and secrets → ADMIN_SENHA). Trocar a senha desconecta todos os aparelhos.</p>
+
+  <!-- ============ CAIXA ============ -->
+  <main class="sec" id="sec-caixa" role="tabpanel" aria-labelledby="aba-caixa">
+    <div class="barra">
+      <div class="segmentos" role="group" aria-label="Período">
+        <button type="button" data-periodo="dia">Dia</button>
+        <button type="button" data-periodo="mes" aria-pressed="true">Mês</button>
+        <button type="button" data-periodo="semestre">Semestre</button>
+        <button type="button" data-periodo="ano">Ano</button>
+      </div>
+      <div class="navegador">
+        <button type="button" class="icone" id="per-ant" aria-label="Período anterior">‹</button>
+        <strong id="per-nome">—</strong>
+        <button type="button" class="icone" id="per-prox" aria-label="Próximo período">›</button>
+        <button type="button" class="link" id="per-hoje">Hoje</button>
+      </div>
+      <div class="barra__acoes">
+        <button type="button" class="btn btn--rosa" id="nova-venda">+ Venda</button>
+        <button type="button" class="btn btn--escuro" id="nova-saida">+ Saída</button>
+        <button type="button" class="btn btn--contorno" id="exportar">Baixar planilha</button>
+      </div>
+    </div>
+
+    <p class="aviso-erro" id="caixa-erro" hidden></p>
+
+    <section class="indicadores" aria-label="Resumo do período">
+      <div class="ind"><span>Entradas</span><b id="k-entradas">R$ 0,00</b><small id="c-entradas"></small></div>
+      <div class="ind"><span>Saídas</span><b id="k-saidas">R$ 0,00</b><small id="c-saidas"></small></div>
+      <div class="ind ind--saldo"><span>Saldo do período</span><b id="k-saldo">R$ 0,00</b><small id="c-saldo"></small></div>
+      <div class="ind"><span>Peças vendidos</span><b id="k-pares">0</b><small id="c-pares"></small></div>
+      <div class="ind"><span>Ticket médio</span><b id="k-ticket">R$ 0,00</b><small id="k-vendas"></small></div>
+      <div class="ind"><span>Lucro estimado das vendas</span><b id="k-lucro">—</b><small id="k-lucro-nota">custo cadastrado nos produtos</small></div>
+    </section>
+
+    <section class="cartao" id="cartao-grafico">
+      <div class="cartao__topo">
+        <h2 id="graf-titulo">Entradas e saídas</h2>
+        <div class="legenda">
+          <span><i class="cor-entrada"></i>Entradas</span>
+          <span><i class="cor-saida"></i>Saídas</span>
+        </div>
+      </div>
+      <div class="grafico" id="grafico"></div>
+      <div class="dica" id="dica" hidden></div>
+    </section>
+
+    <div class="grade2">
+      <section class="cartao">
+        <h2>Por categoria</h2>
+        <table class="tabela tabela--barras" id="t-categorias"><thead><tr><th>Categoria</th><th class="num">Valor</th><th class="num">%</th></tr></thead><tbody></tbody></table>
+      </section>
+      <section class="cartao">
+        <h2>Entradas por forma de pagamento</h2>
+        <table class="tabela tabela--barras" id="t-pagamentos"><thead><tr><th>Pagamento</th><th class="num">Valor</th><th class="num">%</th></tr></thead><tbody></tbody></table>
+      </section>
+    </div>
+
+    <section class="cartao">
+      <h2>Mais vendidos no período</h2>
+      <table class="tabela" id="t-top"><thead><tr><th>Produto</th><th class="num">Peças</th><th class="num">Valor</th></tr></thead><tbody></tbody></table>
+    </section>
+
+    <section class="cartao">
+      <div class="cartao__topo">
+        <h2>Lançamentos</h2>
+        <div class="filtros-lanc">
+          <div class="segmentos segmentos--peq" role="group" aria-label="Tipo de lançamento">
+            <button type="button" data-tipo="todos" aria-pressed="true">Todos</button>
+            <button type="button" data-tipo="entrada">Entradas</button>
+            <button type="button" data-tipo="saida">Saídas</button>
+          </div>
+          <label class="sr" for="lanc-busca">Buscar lançamento</label>
+          <input id="lanc-busca" type="search" placeholder="Buscar descrição ou categoria">
+        </div>
+      </div>
+      <div class="rolagem">
+        <table class="tabela tabela--lanc" id="t-lanc">
+          <thead><tr><th>Data</th><th>Tipo</th><th>Categoria</th><th>Descrição</th><th>Pagamento</th><th class="num">Qtd</th><th class="num">Valor</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="vazio" id="lanc-vazio" hidden>Nenhum lançamento neste período. Use “+ Venda” ou “+ Saída” para registrar.</p>
+    </section>
+  </main>
+
+  <!-- ============ PRODUTOS ============ -->
+  <main class="sec" id="sec-produtos" role="tabpanel" aria-labelledby="aba-produtos" hidden>
+    <section class="cartao envio">
+      <h2>Adicionar fotos</h2>
+      <p class="nota">Arraste as fotos (até 100 de uma vez). Cada foto aparece logo abaixo para você marcar os tamanhos e quantos peças tem de cada um. Depois é só publicar.</p>
+      <div class="padroes">
+        <div class="campo"><label for="pad-preco">Preço das novas (R$)</label><input id="pad-preco" type="text" inputmode="decimal" value="139,90" autocomplete="off"></div>
+        <div class="campo campo--largo"><span class="rotulo">Categorias das novas</span><div class="chips" id="pad-cats"></div></div>
+      </div>
+      <label class="solta" id="solta" for="arquivos">
+        <input id="arquivos" type="file" accept="image/*" multiple>
+        <b>Arraste as fotos aqui</b>
+        <span>ou toque para escolher no celular ou no computador · até 100 fotos</span>
+      </label>
+      <div class="progresso" id="progresso" hidden>
+        <div class="progresso__barra"><i id="progresso-i"></i></div>
+        <span id="progresso-texto"></span>
+      </div>
+      <ul class="falhas" id="falhas"></ul>
+
+      <div class="pendentes" id="pendentes" hidden>
+        <div class="cartao__topo">
+          <h2>Fotos aguardando tamanhos <small id="pend-qtd"></small></h2>
+          <button type="button" class="btn btn--rosa" id="publicar-todas">Publicar todas</button>
+        </div>
+        <p class="nota">Clique no tamanho e digite quantas peças tem dele (ex.: P → 2 peças, M → 1 peça). Bolsas e acessórios: use “Único”. Marque Studio ou Second em cada peça. O × tira o tamanho. Só vai para o site quando você publicar.</p>
+        <div class="lista-pend" id="lista-pend"></div>
+      </div>
+    </section>
+
+    <section class="cartao">
+      <div class="cartao__topo">
+        <h2>Produtos na vitrine <small id="prod-qtd"></small></h2>
+        <div class="barra__acoes">
+          <label class="sr" for="prod-busca">Buscar produto</label>
+          <input id="prod-busca" type="search" placeholder="Buscar produto">
+          <button type="button" class="btn btn--contorno" id="importar" hidden>Trazer as peças de demonstração</button>
+        </div>
+      </div>
+      <p class="vazio" id="prod-vazio" hidden>Nenhum produto cadastrado ainda. Envie as fotos das peças acima.</p>
+      <div class="lista-prod" id="lista-prod"></div>
+    </section>
+
+    <input id="trocar-foto" type="file" accept="image/*" hidden>
+  </main>
+
+  <!-- ============ ESTOQUE ============ -->
+  <main class="sec" id="sec-estoque" role="tabpanel" aria-labelledby="aba-estoque" hidden>
+    <section class="indicadores indicadores--5" aria-label="Resumo do estoque">
+      <div class="ind"><span>Peças em estoque</span><b id="e-pares">0</b><small id="e-modelos"></small></div>
+      <div class="ind"><span>Tamanhos acabando</span><b id="e-baixo">0</b><small>com 1 ou 2 peças</small></div>
+      <div class="ind"><span>Tamanhos esgotados</span><b id="e-zero">0</b><small>cadastrados com 0 peças</small></div>
+      <div class="ind"><span>Estoque a preço de venda</span><b id="e-venda">R$ 0,00</b><small>soma de preço × peças</small></div>
+      <div class="ind"><span>Estoque a preço de custo</span><b id="e-custo">—</b><small id="e-custo-nota"></small></div>
+    </section>
+    <section class="cartao">
+      <div class="cartao__topo">
+        <h2>Peças por tamanho</h2>
+        <div class="filtros-lanc">
+          <div class="segmentos segmentos--peq" role="group" aria-label="Mostrar">
+            <button type="button" data-est="todos" aria-pressed="true">Todos</button>
+            <button type="button" data-est="baixo">Acabando</button>
+            <button type="button" data-est="zero">Com esgotados</button>
+          </div>
+          <label class="sr" for="est-busca">Buscar produto</label>
+          <input id="est-busca" type="search" placeholder="Buscar produto">
+        </div>
+      </div>
+      <p class="nota">Digite a quantidade de peças em cada tamanho. Deixe em branco o tamanho que a peça não tem. Vendas e compras de mercadoria lançadas no caixa com produto e tamanho atualizam estes números sozinhas.</p>
+      <div class="legenda-est"><span><i class="q-baixo"></i>1 ou 2 peças: acabando</span><span><i class="q-zero"></i>0: esgotado no site</span></div>
+      <div class="rolagem"><table class="tabela matriz" id="matriz"><thead></thead><tbody></tbody><tfoot></tfoot></table></div>
+      <p class="vazio" id="est-vazio" hidden>Nenhum produto para mostrar.</p>
+    </section>
+  </main>
+
+  <div class="salvar" id="barra-salvar" hidden>
+    <span>Você tem alterações que ainda não estão no site.</span>
+    <button type="button" class="btn btn--rosa" id="salvar">Salvar e publicar</button>
+  </div>
+</div>
+
+<!-- Lançamento -->
+<div class="camada" id="camada-lanc" hidden>
+  <form class="janela" id="form-lanc" role="dialog" aria-modal="true" aria-labelledby="lanc-titulo">
+    <button class="fechar" type="button" data-fechar aria-label="Fechar">×</button>
+    <h2 id="lanc-titulo">Nova venda</h2>
+    <div class="segmentos" role="group" aria-label="Tipo">
+      <button type="button" data-ltipo="entrada" aria-pressed="true">Entrada</button>
+      <button type="button" data-ltipo="saida">Saída</button>
+    </div>
+    <div class="grade-form">
+      <div class="campo"><label for="l-data">Data</label><input id="l-data" type="date" required></div>
+      <div class="campo"><label for="l-cat">Categoria</label><select id="l-cat"></select></div>
+      <div class="campo" id="l-prod-campo"><label for="l-prod">Produto (opcional)</label><select id="l-prod"><option value="">—</option></select></div>
+      <div class="campo" id="l-tam-campo"><label for="l-tam">Tamanho</label><select id="l-tam" disabled><option value="">—</option></select></div>
+      <p class="nota campo--largo" id="l-tam-nota">Com produto e tamanho, a venda tira a peça do estoque e a compra de mercadoria soma.</p>
+      <div class="campo campo--largo"><label for="l-desc">Descrição</label><input id="l-desc" type="text" maxlength="160" placeholder="Ex.: Vestido Midi Off-White · M"></div>
+      <div class="campo"><label for="l-qtd">Quantidade</label><input id="l-qtd" type="number" min="1" step="1" value="1" required></div>
+      <div class="campo"><label for="l-unit">Valor unitário (R$)</label><input id="l-unit" type="text" inputmode="decimal" autocomplete="off" required></div>
+      <div class="campo"><label for="l-pag">Pagamento</label><select id="l-pag"></select></div>
+      <div class="campo campo--total"><span class="rotulo">Total</span><b id="l-total">R$ 0,00</b></div>
+    </div>
+    <p class="aviso-erro" id="lanc-erro" hidden></p>
+    <div class="janela__acoes">
+      <button type="button" class="btn btn--perigo" id="l-excluir" hidden>Excluir</button>
+      <button type="submit" class="btn btn--rosa" id="l-salvar">Salvar</button>
+    </div>
+  </form>
+</div>
+
+<div class="aviso-rapido" id="aviso-rapido" role="status" hidden></div>
+
+<script src="../dados.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

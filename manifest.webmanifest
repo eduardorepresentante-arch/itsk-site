@@ -1,0 +1,11 @@
+{
+  "name": "ITSK Studio and Second",
+  "short_name": "ITSK",
+  "description": "Boutique feminina: Studio (nova coleção) e Second (brechó premium).",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0E0E0E",
+  "theme_color": "#0E0E0E",
+  "lang": "pt-BR",
+  "icons": [{ "src": "img/icone.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
