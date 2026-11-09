@@ -235,6 +235,8 @@ body.solido .abas__pilula { background: var(--preto); }
 /* ---------- Venda suas peças ---------- */
 .consigne { padding: clamp(80px, 12vw, 160px) var(--lado); }
 .consigne__caixa { max-width: 860px; margin: 0 auto; padding: clamp(36px, 6vw, 72px); border-radius: 28px; text-align: center; background: rgba(245,242,236,.88); backdrop-filter: blur(22px) saturate(1.3); -webkit-backdrop-filter: blur(22px) saturate(1.3); box-shadow: 0 40px 80px rgba(0,0,0,.3); }
+.consigne__botoes { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.consigne__botoes [hidden] { display: none; }
 .consigne__caixa > p:not(.sobretitulo) { margin: 20px auto 30px; max-width: 520px; color: var(--suave); }
 
 /* ---------- Rodapé ---------- */

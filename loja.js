@@ -336,7 +336,11 @@ $("#link-consigne").addEventListener("click", semWhats);
 (function rodape() {
   const contato = $("#rodape-contato"), loja = $("#rodape-loja");
   if (LOJA.whatsapp) contato.append(el("a", { href: linkWhats("Olá, ITSK!"), target: "_blank", rel: "noopener", text: "WhatsApp " + (LOJA.whatsappTexto || "") }));
-  if (LOJA.instagram) contato.append(el("a", { href: LOJA.instagram, target: "_blank", rel: "noopener", text: "Instagram" }));
+  if (LOJA.instagram) contato.append(el("a", { href: LOJA.instagram, target: "_blank", rel: "noopener", text: "Instagram " + (LOJA.instagramTexto || "") }));
+  if (LOJA.grupoVip) {
+    contato.append(el("a", { href: LOJA.grupoVip, target: "_blank", rel: "noopener", text: "Grupo VIP no WhatsApp" }));
+    $("#link-vip").href = LOJA.grupoVip; $("#link-vip").hidden = false;
+  }
   if (!LOJA.whatsapp && !LOJA.instagram) contato.append(el("p", { text: "Em breve: WhatsApp e Instagram." }));
   if (LOJA.endereco) loja.append(LOJA.mapa ? el("a", { href: LOJA.mapa, target: "_blank", rel: "noopener", text: LOJA.endereco }) : el("p", { text: LOJA.endereco }));
   if (LOJA.referencia) loja.append(el("p", { text: LOJA.referencia }));

@@ -4,10 +4,12 @@
    ============================================================ */
 const LOJA = {
   nome: "ITSK Studio and Second",
-  // WhatsApp com DDI 55 + DDD + número, só dígitos  (PREENCHER COM O NÚMERO DA LOJA)
-  whatsapp: "",
-  whatsappTexto: "",
-  instagram: "", // ex.: "https://instagram.com/itsk"
+  // WhatsApp com DDI 55 + DDD + número, só dígitos
+  whatsapp: "5547996713236",
+  whatsappTexto: "(47) 9 9671-3236",
+  instagram: "https://www.instagram.com/itskbrecho",
+  instagramTexto: "@itskbrecho",
+  grupoVip: "https://chat.whatsapp.com/CBy06XAYG6dLKO8mWJ6hSB",
   endereco: "",
   referencia: "",
   horario: "",
