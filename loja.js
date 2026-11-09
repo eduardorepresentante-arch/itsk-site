@@ -166,7 +166,7 @@ function card(p, i) {
   const c = el("article", { class: "card" + (esgotada ? " esgotado" : "") },
     el("div", { class: "card__foto", onclick: () => abrirPeca(p.id) },
       foto(p), selo, fav,
-      el("button", { type: "button", class: "card__rapido", text: esgotada ? "Ver peça" : "Ver e escolher", onclick: e => { e.stopPropagation(); abrirPeca(p.id); } })),
+      el("button", { type: "button", class: "card__rapido", text: esgotada ? "Ver peça" : "Escolher tamanho", onclick: e => { e.stopPropagation(); abrirPeca(p.id); } })),
     el("div", { class: "card__info" },
       el("h3", { class: "card__nome" }, el("button", { type: "button", text: p.nome, onclick: () => abrirPeca(p.id) })),
       precoBloco(p, "card__preco"),
@@ -197,7 +197,7 @@ function abrirPeca(id) {
   desenharTams();
   $("#peca-aviso").hidden = true;
   $("#peca-sacola").disabled = !disp.length;
-  $("#peca-sacola").textContent = disp.length ? "Adicionar à sacola" : (unica(p) ? "Peça vendida" : "Esgotada");
+  $("#peca-sacola").textContent = disp.length ? (unica(p) ? "Quero esta peça única" : "Adicionar à sacola") : (unica(p) ? "Peça vendida" : "Esgotada");
   $("#peca-nota").textContent = unica(p) ? "Peça única do Second: existe só esta. Garantimos assim que o pedido for confirmado." : "";
   $("#peca-whats").href = linkWhats(`Olá! Tenho interesse na peça "${p.nome}" (${COLECOES[colecaoDe(p)].nome}) que vi no site da ITSK.`);
   abrir($("#peca"));
@@ -227,7 +227,7 @@ function colocarNaSacola(p, t) {
     item.qtd++;
   } else sacola.push({ id: p.id, tam: t, qtd: 1 });
   salvarSacola();
-  avisar(`${p.nome} na sacola.`);
+  avisar(`Pronto! ${p.nome} está na sua sacola.`);
 }
 function salvarSacola() {
   sacola = sacola.filter(i => acha(i.id));
@@ -257,7 +257,7 @@ function desenharSacola() {
     : [el("p", { class: "gaveta__vazia", text: "Sua sacola está vazia. Que tal começar pelo Studio ou pelo Second?" })]));
   $("#sacola-finalizar").hidden = !itens.length;
   const linhas = itens.map(i => `• ${i.qtd}x ${i.p.nome} (${COLECOES[colecaoDe(i.p)].nome}) · Tam. ${rotuloTam(i.tam)} · ${reais(i.p.preco * i.qtd)}`);
-  $("#sacola-finalizar").href = linkWhats(`Olá, ITSK! Quero fazer este pedido pelo site:\n\n${linhas.join("\n")}\n\nTotal: ${reais(total)}`);
+  $("#sacola-finalizar").href = linkWhats(`Olá, ITSK! Quero fazer este pedido pelo site:\n\n${linhas.join("\n")}\n\nTotal: ${reais(total)}\n\nMeu nome:\nCidade / CEP para entrega:`);
 }
 const mudarQtd = (i, d) => { const s = sacola.find(x => x.id === i.id && x.tam === i.tam); if (s) s.qtd = Math.max(1, s.qtd + d); salvarSacola(); };
 const tirar = i => { sacola = sacola.filter(x => !(x.id === i.id && x.tam === i.tam)); salvarSacola(); };
@@ -331,6 +331,22 @@ $("#ordem").addEventListener("change", e => { estado.ordem = e.target.value; mos
 $("#limpar").addEventListener("click", () => { estado.cat = "todas"; estado.tam = ""; montarFiltros(); mostrar(); });
 $("#link-consigne").href = linkWhats("Olá, ITSK! Tenho peças femininas para avaliar no Second (brechó). Como funciona?");
 $("#link-consigne").addEventListener("click", semWhats);
+$("#whats-flutuante").href = linkWhats("Olá, ITSK! Vim pelo site e queria ajuda para escolher uma peça.");
+$("#whats-flutuante").hidden = !LOJA.whatsapp;
+
+/* Pausar o vídeo de fundo (quem preferir sem movimento) */
+(function () {
+  const v = $("#fundo-video"), b = $("#pausa-video");
+  let parado = ler("itsk-video-parado", false);
+  const aplicar = () => {
+    b.setAttribute("aria-pressed", String(parado));
+    b.setAttribute("aria-label", parado ? "Tocar o vídeo de fundo" : "Pausar o vídeo de fundo");
+    parado ? v.pause() : v.play().catch(() => {});
+  };
+  b.addEventListener("click", () => { parado = !parado; guardar("itsk-video-parado", parado); aplicar(); });
+  if (parado) aplicar();
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && parado) v.pause(); });
+})();
 
 /* ---------- Rodapé ---------- */
 (function rodape() {

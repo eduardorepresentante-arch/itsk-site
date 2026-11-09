@@ -1,2 +1,5 @@
 User-agent: *
 Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://itsktest.pages.dev/sitemap.xml
