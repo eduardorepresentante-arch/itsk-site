@@ -365,8 +365,8 @@ dialog[open]::backdrop { animation: veu .4s ease; }
    ele fica numa faixa larga no alto da tela, com as bordas sumindo no preto. */
 @media (max-aspect-ratio: 4/5) {
   .fundo video {
-    position: absolute; left: 50%; top: calc(var(--topo-h) + 3svh);
-    width: 145vw; max-width: none; height: auto; aspect-ratio: 736 / 400; object-fit: cover;
+    position: absolute; left: 50%; top: calc(var(--topo-h) - 5svh);
+    width: min(130vw, 74svh); max-width: none; height: auto; aspect-ratio: 736 / 400; object-fit: cover;
     transform: translateX(-50%) scale(calc(1 + var(--rolagem, 0) * .12));
     -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 80%, transparent 100%);
     mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 80%, transparent 100%);

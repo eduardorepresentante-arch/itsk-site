@@ -1,6 +1,6 @@
 /* Guarda o básico do site para abrir rápido e funcionar sem internet.
    Peças e fotos do painel (/api, /fotos) sempre vêm da internet primeiro. */
-const VERSAO = "itsk-v3";
+const VERSAO = "itsk-v4";
 const BASICO = ["./", "index.html", "estilo.css", "loja.js", "dados.js", "img/icone.svg", "img/itsk-fundo-poster.jpg"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(VERSAO).then(c => c.addAll(BASICO))); self.skipWaiting(); });
 self.addEventListener("activate", e => {
