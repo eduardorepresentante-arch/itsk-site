@@ -377,6 +377,8 @@ dialog:not([open]) { display: none !important; }
 }
 @media (max-width: 860px) {
   .passos { grid-template-columns: 1fr; }
+  /* espaço para as abas e o WhatsApp flutuantes não cobrirem o fim do rodapé */
+  .rodape { padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
   .whats-flutuante { width: 52px; height: 52px; bottom: calc(14px + env(safe-area-inset-bottom)); }
   .pausa { bottom: calc(18px + env(safe-area-inset-bottom) + 50px); }
 }
